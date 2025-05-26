@@ -34,7 +34,68 @@
 
 ## Compatibility
 
-This starter is compatible with versions >= 2.4.0 of `@medusajs/medusa`. 
+This starter is compatible with versions >= 2.4.0 of `@medusajs/medusa`.
+
+---
+
+## Medusa File Cloudinary Plugin
+
+This plugin allows you to use [Cloudinary](https://cloudinary.com/) as a file provider in your Medusa store.
+
+### Installation
+
+Install the plugin in your Medusa project:
+
+```bash
+yarn add @jaykanjia/medusa-file-cloudinary
+# or
+npm install @jaykanjia/medusa-file-cloudinary
+```
+
+---
+
+### Configuration
+
+#### Step 1: Update Medusa Configuration
+
+Modify your `medusa-config.ts` (usually found in your Medusa project's root or under `medusa-store-final/medusa-config.ts`) to register the plugin as a file provider:
+
+```ts
+{
+  resolve: "@medusajs/medusa/file",
+  options: {
+    providers: [
+      {
+        resolve: "@jaykanjia/medusa-file-cloudinary/providers/file-cloudinary",
+        id: "cloudinary",
+        options: {
+          apiKey: process.env.CLOUDINARY_API_KEY,
+          apiSecret: process.env.CLOUDINARY_API_SECRET,
+          cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+          folderName: "medusa", // optional, defaults to root
+          secure: true,         // optional, defaults to true
+        },
+      },
+    ],
+  },
+},
+```
+
+---
+
+#### Step 2: Set Environment Variables
+
+Add the following environment variables to your `.env` file:
+
+```env
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+```
+
+You can find these credentials in your Cloudinary dashboard.
+
+---
 
 ## Getting Started
 
@@ -48,7 +109,7 @@ Visit the [Docs](https://docs.medusajs.com/learn/installation#get-started) to le
 
 Medusa is a set of commerce modules and tools that allow you to build rich, reliable, and performant commerce applications without reinventing core commerce logic. The modules can be customized and used to build advanced ecommerce stores, marketplaces, or any product that needs foundational commerce primitives. All modules are open-source and freely available on npm.
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/learn/introduction/architecture) and [commerce modules](https://docs.medusajs.com/learn/fundamentals/modules/commerce-modules) in the Docs.
+Learn more about [Medusa's architecture](https://docs.medusajs.com/learn/introduction/architecture) and [commerce modules](https://docs.medusajs.com/learn/fundamentals/modules/commerce-modules) in the Docs.
 
 ## Community & Contributions
 
