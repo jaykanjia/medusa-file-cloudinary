@@ -2,19 +2,6 @@
 	"name": "@jaykanjia/medusa-file-cloudinary",
 	"version": "1.0.0",
 	"description": "A starter for Medusa plugins.",
-	"author": "Medusa (https://medusajs.com)",
-	"license": "MIT",
-	"files": [
-		".medusa/server"
-	],
-	"exports": {
-		"./package.json": "./package.json",
-		"./workflows": "./.medusa/server/src/workflows/index.js",
-		"./.medusa/server/src/modules/*": "./.medusa/server/src/modules/*/index.js",
-		"./modules/*": "./.medusa/server/src/modules/*/index.js",
-		"./providers/*": "./.medusa/server/src/providers/*/index.js",
-		"./*": "./.medusa/server/src/*.js"
-	},
 	"keywords": [
 		"medusa",
 		"plugin",
@@ -37,10 +24,37 @@
 		"medusa-plugin-file",
 		"medusa-plugin-cloudinary"
 	],
+	"homepage": "https://github.com/jaykanjia/medusa-file-cloudinary#readme",
+	"bugs": {
+		"url": "https://github.com/jaykanjia/medusa-file-cloudinary/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jaykanjia/medusa-file-cloudinary.git"
+	},
+	"license": "MIT",
+	"author": "Medusa (https://medusajs.com)",
+	"type": "commonjs",
+	"exports": {
+		"./package.json": "./package.json",
+		"./workflows": "./.medusa/server/src/workflows/index.js",
+		"./.medusa/server/src/modules/*": "./.medusa/server/src/modules/*/index.js",
+		"./modules/*": "./.medusa/server/src/modules/*/index.js",
+		"./providers/*": "./.medusa/server/src/providers/*/index.js",
+		"./*": "./.medusa/server/src/*.js"
+	},
+	"main": "index.js",
+	"files": [
+		".medusa/server"
+	],
 	"scripts": {
 		"build": "medusa plugin:build",
 		"dev": "medusa plugin:develop",
 		"prepublishOnly": "medusa plugin:build"
+	},
+	"dependencies": {
+		"cloudinary": "^2.6.1",
+		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
 		"@medusajs/admin-sdk": "2.4.0",
@@ -87,9 +101,5 @@
 	},
 	"engines": {
 		"node": ">=20"
-	},
-	"dependencies": {
-		"cloudinary": "^2.6.1",
-		"uuid": "^11.1.0"
 	}
 }
