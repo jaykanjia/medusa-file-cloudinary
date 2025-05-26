@@ -1,7 +1,7 @@
 {
 	"name": "@jaykanjia/medusa-file-cloudinary",
-	"version": "1.0.0",
-	"description": "A starter for Medusa plugins.",
+	"version": "1.0.1",
+	"description": "A Medusa plugin to use Cloudinary as a file storage provider. Seamlessly upload, retrieve, and manage media files in your Medusa store using Cloudinary.",
 	"keywords": [
 		"medusa",
 		"plugin",

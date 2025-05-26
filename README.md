@@ -40,7 +40,8 @@ This starter is compatible with versions >= 2.4.0 of `@medusajs/medusa`.
 
 ## Medusa File Cloudinary Plugin
 
-This plugin allows you to use [Cloudinary](https://cloudinary.com/) as a file provider in your Medusa store.
+Easily integrate [Cloudinary](https://cloudinary.com/) as a file storage provider in your Medusa store.  
+This plugin enables seamless upload, retrieval, and management of images and other media files using Cloudinary's robust cloud infrastructure, directly from your Medusa backend.
 
 ### Installation
 
