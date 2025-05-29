@@ -54,6 +54,8 @@ class CloudinaryFileProviderService extends AbstractFileProviderService {
 	async upload(file: ProviderUploadFileDTO): Promise<ProviderFileResultDTO> {
 		const publicId = this.generatePublicId(file.filename);
 
+		console.log({ publicId });
+
 		// Convert binary-encoded string to Buffer
 		const buffer = Buffer.from(file.content, "binary");
 
@@ -65,6 +67,8 @@ class CloudinaryFileProviderService extends AbstractFileProviderService {
 					folder: this.options_?.folderName || undefined,
 				},
 				(error, result) => {
+					console.log({ result });
+
 					if (error) return reject(error);
 					if (!result)
 						return reject(
@@ -72,7 +76,7 @@ class CloudinaryFileProviderService extends AbstractFileProviderService {
 						);
 					resolve({
 						url: result.secure_url,
-						key: result.public_id,
+						key: result.public_id.replace(this.options_?.folderName || "", ""),
 					});
 				}
 			);
@@ -82,7 +86,17 @@ class CloudinaryFileProviderService extends AbstractFileProviderService {
 	}
 
 	async delete(file: ProviderDeleteFileDTO): Promise<void> {
-		await cloudinary.uploader.destroy(file.fileKey, { resource_type: "auto" });
+		const publicId =
+			(this.options_?.folderName ? `${this.options_?.folderName}/` : "") +
+			file.fileKey.replace(/\.[^/.]+$/, "");
+
+		console.log({ publicId });
+
+		await cloudinary.uploader
+			.destroy(publicId)
+			.then((result) => console.log(result));
+
+		return;
 	}
 
 	async getAsBuffer(file: { fileKey: string }): Promise<Buffer> {
@@ -103,7 +117,9 @@ class CloudinaryFileProviderService extends AbstractFileProviderService {
 
 	// helper function
 	private cleanFilename(filename: string): string {
-		return filename
+		// Remove the file extension
+		const filenameWithoutExtension = filename.replace(/\.[^/.]+$/, "");
+		return filenameWithoutExtension
 			.replace(/[^a-zA-Z0-9.\-_]/g, "_")
 			.replace(/_+/g, "_")
 			.replace(/^_+|_+$/g, "")
